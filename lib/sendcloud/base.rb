@@ -9,7 +9,6 @@ module Sendcloud
       Sendcloud.protocol       = options.fetch(:protocol, 'https')
       Sendcloud.api_user       = options.fetch(:api_user) { raise ArgumentError.new(":api_user is a required argument to initialize Sendcloud") if Sendcloud.api_user.nil? }
       Sendcloud.api_key        = options.fetch(:api_key) { raise ArgumentError.new(":api_key is a required argument to initialize Sendcloud") if Sendcloud.api_key.nil? }
-      #Sendcloud.send_type = options.fetch :send_type, 'json'
     end
     
     def base_url
@@ -24,6 +23,11 @@ module Sendcloud
   
   class << self
     attr_accessor :sendcloud_host, :protocol, :api_user, :api_key
+    def configure
+      yield self
+      true
+    end
+    alias :config :configure
   end
   
   def self.submit method, url, parameters={}
