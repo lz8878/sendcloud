@@ -12,7 +12,7 @@ module Sendcloud
     end
     
     def base_url
-      "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}／webapi"
+      "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}/webapi"
     end
     
     def messages

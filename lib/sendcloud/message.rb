@@ -15,7 +15,7 @@ module Sendcloud
     
     private
     def message_url
-      "#{@sendcloud.base_url}/message.send"
+      "#{@sendcloud.base_url}/message.send.json"
     end
   end
 end

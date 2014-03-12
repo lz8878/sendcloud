@@ -9,13 +9,13 @@ describe Sendcloud::Base do
   
   it "should raise an error if the api_user has not been set" do
     expect do
-      Sendcloud :api_key => "api-key"
+      Sendcloud({:api_key => "api-key"})
     end.to raise_error ArgumentError
   end
   
   it "should raise an error if the api_key has not been set" do
     expect do
-      Sendcloud :api_user => "api-user"
+      Sendcloud({:api_user => "api-user"})
     end.to raise_error ArgumentError
   end
   
@@ -32,24 +32,24 @@ describe Sendcloud::Base do
   
   it "can be instanced with the api_key and api_user" do
     expect do
-      Sendcloud :api_key => "api-key", :api_user => 'api-user'
+      Sendcloud({:api_key => "api-key", :api_user => 'api-user'})
     end.not_to raise_error()
   end
   
   describe "Sendcloud.new" do
     it "Sendcloud() method should return a new Sendcloud object" do
-      sendcloud = Sendcloud :api_key => "api-key", :api_user => 'api-user'
+      sendcloud = Sendcloud({:api_key => "api-key", :api_user => 'api-user'})
       sendcloud.should be_kind_of Sendcloud::Base
     end
   end
   
   describe "internal helper methods" do
     before :each do
-      @sendcloud = Sendcloud :api_key => "api-key", :api_user => 'api-user'
+      @sendcloud = Sendcloud({:api_key => "api-key", :api_user => 'api-user'})
     end
     describe "Sendcloud#base_url" do
       it "should return https url if use_https is true" do
-        @sendcloud.base_url.should eq("https://#{Sendcloud.sendcloud_host}／webapi")
+        @sendcloud.base_url.should eq("https://#{Sendcloud.sendcloud_host}/webapi")
       end
     end
   end
