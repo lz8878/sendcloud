@@ -19,6 +19,10 @@ module Sendcloud
       Sendcloud::Message.new(self)
     end
     
+    def stats(api_user = Sendcloud.api_user, api_key = Sendcloud.api_key)
+      Sendcloud::Stats.new(self, api_user, api_key)
+    end
+    
   end
   
   class << self
