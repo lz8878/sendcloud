@@ -62,6 +62,9 @@ describe Sendcloud::Base do
       it "sendcloud_host is 'sendcloud.sohu.com'" do
         Sendcloud.sendcloud_host.should eq("sendcloud.sohu.com")
       end
+      it "data_type is 'json'" do
+        Sendcloud.data_type.should eq("json")
+      end
     end
     
     describe "setting configurations" do
@@ -71,6 +74,7 @@ describe Sendcloud::Base do
           c.sendcloud_host = 'sendcloud.sohu.com'
           c.api_key = 'set-sendcloud-api-key'
           c.api_user = 'JingLi@gmail.com'
+          c.data_type = 'xml'
         end
       end
       
@@ -85,6 +89,9 @@ describe Sendcloud::Base do
       end
       it "allows me to set the sendcloud_host attribute" do
         Sendcloud.sendcloud_host.should eq('sendcloud.sohu.com')
+      end
+      it "allows me to set the data_type attribute" do
+        Sendcloud.data_type.should eq('xml')
       end
     end
   end

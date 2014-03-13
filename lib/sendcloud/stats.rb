@@ -1,9 +1,10 @@
 module Sendcloud
   class Stats
-    def initialize sendcloud, api_user, api_key
+    def initialize sendcloud, api_user, api_key, data_type
       @sendcloud = sendcloud
       @api_user = api_user
       @api_key = api_key
+      @data_type = data_type
     end
     
     def get_categories
@@ -12,13 +13,13 @@ module Sendcloud
     
     def get parameters = {}
       # options:
-      # :days, :start_date, :end_date, :list, :category||:category[], :aggregate
+      # :days, :start_date, :end_date, :list, :category, :aggregate
       Sendcloud.submit :get, stats_url, parameters
     end
     
     private
     def stats_url
-      "#{@sendcloud.base_url}/stats.get.json?api_user=#{@api_user}&api_key=#{@api_key}"
+      "#{@sendcloud.base_url}/stats.get.#{@data_type}?api_user=#{@api_user}&api_key=#{@api_key}"
     end
   end
 end
