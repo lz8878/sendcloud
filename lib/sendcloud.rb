@@ -6,6 +6,7 @@ require "multimap"
 require "sendcloud/base"
 require "sendcloud/message"
 require "sendcloud/stats"
+require "sendcloud/unsubscribe"
 
 def Sendcloud options = {}
   options[:api_user] = Sendcloud.api_user if Sendcloud.api_user

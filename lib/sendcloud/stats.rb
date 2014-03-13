@@ -1,14 +1,11 @@
 module Sendcloud
   class Stats
-    def initialize sendcloud, api_user, api_key, data_type
+    def initialize sendcloud
       @sendcloud = sendcloud
-      @api_user = api_user
-      @api_key = api_key
-      @data_type = data_type
     end
     
     def get_categories
-      get({ :list => true })['categories']||[]
+      get({ :list => true })
     end
     
     def get parameters = {}
@@ -18,8 +15,8 @@ module Sendcloud
     end
     
     private
-    def stats_url
-      "#{@sendcloud.base_url}/stats.get.#{@data_type}?api_user=#{@api_user}&api_key=#{@api_key}"
+    def stats_url motion = 'get'
+      @sendcloud.base_url('stats', motion)
     end
   end
 end

@@ -14,8 +14,8 @@ module Sendcloud
     end
     
     private
-    def message_url
-      "#{@sendcloud.base_url}/message.send.json"
+    def message_url motion = 'send'
+      @sendcloud.base_url('message', motion)
     end
   end
 end

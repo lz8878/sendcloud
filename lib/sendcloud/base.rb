@@ -12,18 +12,22 @@ module Sendcloud
       Sendcloud.data_type       = options.fetch(:data_type, 'json')
     end
     
-    def base_url
-      "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}/webapi"
+    
+    def base_url mod = 'stats', motion = 'get', data_type = Sendcloud.data_type
+      "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}/webapi/#{mod}.#{motion}.#{data_type}?api_user=#{Sendcloud.api_user}&api_key=#{Sendcloud.api_key}"
     end
     
     def messages
       Sendcloud::Message.new(self)
     end
     
-    def stats(api_user = Sendcloud.api_user, api_key = Sendcloud.api_key, data_type = Sendcloud.data_type)
-      Sendcloud::Stats.new(self, api_user, api_key, data_type)
+    def stats
+      Sendcloud::Stats.new(self)
     end
     
+    def unsubscribes
+      Sendcloud::Unsubscribe.new(self)
+    end
   end
   
   class << self
