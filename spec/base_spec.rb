@@ -48,8 +48,8 @@ describe Sendcloud::Base do
       @sendcloud = Sendcloud({:api_key => "api-key", :api_user => 'api-user'})
     end
     describe "Sendcloud#base_url" do
-      it "the base_url should return https://sendcloud.sohu.com/webapi/stats.get.json?api_user=Sendcloud.api_user&api_key=Sendcloud.api_key" do
-        @sendcloud.base_url.should eq("https://#{Sendcloud.sendcloud_host}/webapi/stats.get.json?api_user=#{Sendcloud.api_user}&api_key=#{Sendcloud.api_key}")
+      it "the base_url should return https://sendcloud.sohu.com/webapi/stats.get.json" do
+        @sendcloud.base_url.should eq("https://#{Sendcloud.sendcloud_host}/webapi/stats.get.json")
       end
     end
   end

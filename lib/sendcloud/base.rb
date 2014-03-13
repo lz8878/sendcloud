@@ -13,7 +13,7 @@ module Sendcloud
     
     
     def base_url mod = 'stats', motion = 'get'
-      "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}/webapi/#{mod}.#{motion}.json?api_user=#{Sendcloud.api_user}&api_key=#{Sendcloud.api_key}"
+      "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}/webapi/#{mod}.#{motion}.json"
     end
     
     def mail
@@ -38,11 +38,12 @@ module Sendcloud
     alias :config :configure
   end
   
-  def self.submit method, url, parameters={}
+  def self.submit(method, url, parameters={})
     begin
-      p url
+      parameters[:api_user] = Sendcloud.api_user
+      parameters[:api_key] = Sendcloud.api_key
       parameters = {:params => parameters} if method == :get
-      return RestClient.send(method, url, parameters)
+      return JSON.parse(RestClient.send(method, url, parameters))
     rescue => e
       raise e
     end
