@@ -13,7 +13,7 @@ module Sendcloud
     
     def get parameters = {}
       # options:
-      # :days, :start_date, :end_date, :list, :category, :aggregate
+      # :days, :start_date, :end_date, :list, :category||:category[], :aggregate
       Sendcloud.submit :get, stats_url, parameters
     end
     
