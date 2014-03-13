@@ -24,7 +24,7 @@ module Sendcloud
     private
     
     def unsubscribe_url motion = 'get'
-      @sendcloud.base_url('subscribes', motion)
+      @sendcloud.base_url('unsubscribes', motion)
     end
   end
 end
