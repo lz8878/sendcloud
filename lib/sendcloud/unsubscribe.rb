@@ -7,8 +7,8 @@ module Sendcloud
     
     # options:
     # :days, :start_date, :end_date, :start, :limit, :email
-    def list paramters = {}
-      Sendcloud.submit :get, unsubscribe_url('get'), paramters
+    def list parameters = {}
+      Sendcloud.submit :get, unsubscribe_url('get'), parameters
     end
     
     def add email
@@ -17,8 +17,8 @@ module Sendcloud
     
     # options:
     # :start_date, :end_date, :email
-    def remove paramters = {}
-      Sendcloud.submit :post, unsubscribe_url('delete'), paramters
+    def remove parameters = {}
+      Sendcloud.submit :post, unsubscribe_url('delete'), parameters
     end
     
     private

@@ -27,6 +27,10 @@ module Sendcloud
     def unsubscribes
       Sendcloud::Unsubscribe.new(self)
     end
+    
+    def bounces
+      Sendcloud::Bounce.new(self)
+    end
   end
   
   class << self
