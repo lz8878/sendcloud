@@ -31,6 +31,10 @@ module Sendcloud
     def bounces
       Sendcloud::Bounce.new(self)
     end
+    
+    def templates
+      Sendcloud::Template.new(self)
+    end
   end
   
   class << self

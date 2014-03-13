@@ -13,6 +13,12 @@ module Sendcloud
       Sendcloud.submit :post, mail_url, parameters
     end
     
+    def send_template parameters = {}
+      # options: 
+      # :template_invoke_name, :subject, :from, :fromname, :substitution_vars
+      Sendcloud.submit :post, mail_url('send_template'), parameters
+    end
+    
     private
     def mail_url motion = 'send'
       @sendcloud.base_url('mail', motion)
