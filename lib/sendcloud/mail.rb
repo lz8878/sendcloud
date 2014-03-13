@@ -1,5 +1,5 @@
 module Sendcloud
-  class Message
+  class Mail
     def initialize sendcloud
        @sendcloud = sendcloud
     end
@@ -10,12 +10,12 @@ module Sendcloud
       # :cc, :bcc, :replyto, :use_maillist, :headers, :x_smtpapi, :resp_email_id, :gzip_compress
       # :attachment
       # :attachments
-      Sendcloud.submit :post, message_url, parameters
+      Sendcloud.submit :post, mail_url, parameters
     end
     
     private
-    def message_url motion = 'send'
-      @sendcloud.base_url('message', motion)
+    def mail_url motion = 'send'
+      @sendcloud.base_url('mail', motion)
     end
   end
 end

@@ -12,7 +12,6 @@ describe Sendcloud::Unsubscribe do
     }
   end
   
-  
   describe "find unsubscribes list" do
     it "should make a GET request with the right params" do
       unsubscribe_url = @sendcloud.unsubscribes.send(:unsubscribe_url, "get")
@@ -30,20 +29,6 @@ EOF
     end
   end
   
-  describe "find unsubscribe" do
-    it "should make a GET request with the right params" do
-      unsubscribe_url = @sendcloud.unsubscribes.send(:unsubscribe_url, "get")
-      sampe_response = <<EOF
-      {
-        "message": "success", 
-        "unsubscribe": {"email": "#{@sampe[:email]}", "created_at": "2013-03-27 17:34:46"}
-      }
-EOF
-      Sendcloud.should_receive(:submit).with(:get, unsubscribe_url, @sampe[:email]).and_return(sampe_response)
-      @sendcloud.unsubscribes.find(@sampe[:email])
-    end
-  end
-  
   describe "add unsubscribe" do
     it "should make a POST request with correct params to add a given email address" do
       unsubscribe_url = @sendcloud.unsubscribes.send(:unsubscribe_url, "add")
@@ -53,22 +38,22 @@ EOF
         "unsubscribe": {"email": "#{@sampe[:email]}", "created_at": "2013-03-27 17:34:46"}
       }
 EOF
-      Sendcloud.should_receive(:submit).with(:post, unsubscribe_url, @sampe[:email]).and_return(sampe_response)
+      Sendcloud.should_receive(:submit).with(:post, unsubscribe_url, {:email => @sampe[:email]}).and_return(sampe_response)
       @sendcloud.unsubscribes.add(@sampe[:email]) 
     end
   end
   
   describe "remove unsubscribe" do
-    it "should make a DELETE request with correct params to remove a given email address" do
+    it "should make a DELETE request with right params to remove a given email address" do
       unsubscribe_url = @sendcloud.unsubscribes.send(:unsubscribe_url, "delete")
       sampe_response = <<EOF
       {
         "message": "success", 
-        "del_count": 0
+        "del_count": 1
       }
 EOF
-      Sendcloud.should_receive(:submit).with(:delete, unsubscribe_url, @sampe[:email]).and_return(sampe_response)
-      @sendcloud.unsubscribes.remove @sampe[:email]
+      Sendcloud.should_receive(:submit).with(:post, unsubscribe_url, {:email => @sampe[:email]}).and_return(sampe_response)
+      @sendcloud.unsubscribes.remove({:email => @sampe[:email]})
     end
   end
 end

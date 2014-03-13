@@ -4,7 +4,7 @@ require "json"
 require "multimap"
 
 require "sendcloud/base"
-require "sendcloud/message"
+require "sendcloud/mail"
 require "sendcloud/stats"
 require "sendcloud/unsubscribe"
 

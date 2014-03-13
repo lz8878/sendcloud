@@ -62,9 +62,6 @@ describe Sendcloud::Base do
       it "sendcloud_host is 'sendcloud.sohu.com'" do
         Sendcloud.sendcloud_host.should eq("sendcloud.sohu.com")
       end
-      it "data_type is 'json'" do
-        Sendcloud.data_type.should eq("json")
-      end
     end
     
     describe "setting configurations" do

@@ -5,20 +5,20 @@ module Sendcloud
       @sendcloud = sendcloud
     end
     
-    def find email
-      Sendcloud.submit :get, unsubscribe_url('get'), email
-    end
-    
+    # options:
+    # :days, :start_date, :end_date, :start, :limit, :email
     def list paramters = {}
       Sendcloud.submit :get, unsubscribe_url('get'), paramters
     end
     
     def add email
-      Sendcloud.submit :post, unsubscribe_url('add'), email
+      Sendcloud.submit :post, unsubscribe_url('add'), {:email => email}
     end
     
-    def remove email
-      Sendcloud.submit :delete, unsubscribe_url('delete'), email
+    # options:
+    # :start_date, :end_date, :email
+    def remove paramters = {}
+      Sendcloud.submit :post, unsubscribe_url('delete'), paramters
     end
     
     private
