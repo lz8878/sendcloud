@@ -1,13 +1,13 @@
 module Sendcloud
   class Unsubscribe
     
-    def initialize sendcloud
+    def initialize(sendcloud)
       @sendcloud = sendcloud
     end
     
     # options:
     # :days, :start_date, :end_date, :start, :limit, :email
-    def list parameters = {}
+    def list(parameters = {})
       Sendcloud.submit :get, unsubscribe_url('get'), parameters
     end
     
@@ -17,13 +17,13 @@ module Sendcloud
     
     # options:
     # :start_date, :end_date, :email
-    def remove parameters = {}
+    def remove(parameters = {})
       Sendcloud.submit :post, unsubscribe_url('delete'), parameters
     end
     
     private
     
-    def unsubscribe_url motion = 'get'
+    def unsubscribe_url(motion = 'get')
       @sendcloud.base_url('unsubscribes', motion)
     end
   end

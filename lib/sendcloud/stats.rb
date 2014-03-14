@@ -8,14 +8,14 @@ module Sendcloud
       get({ :list => true })
     end
     
-    def get parameters = {}
+    def get(parameters = {})
       # options:
       # :days, :start_date, :end_date, :list, :category||:category[], :aggregate
       Sendcloud.submit :get, stats_url, parameters
     end
     
     private
-    def stats_url motion = 'get'
+    def stats_url(motion = 'get')
       @sendcloud.base_url('stats', motion)
     end
   end

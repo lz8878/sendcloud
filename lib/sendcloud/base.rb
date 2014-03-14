@@ -4,7 +4,7 @@ module Sendcloud
     # http://sendcloud.sohu.com/sendcloud/api-doc/web-api-ref
     # https://sendcloud.sohu.com/webapi/<模块>.<动作>.<格式>
     
-    def initialize options
+    def initialize(options)
       Sendcloud.sendcloud_host = options.fetch(:sendcloud_host, 'sendcloud.sohu.com')
       Sendcloud.protocol       = options.fetch(:protocol, 'https')
       Sendcloud.api_user       = options.fetch(:api_user) { raise ArgumentError.new(":api_user is a required argument to initialize Sendcloud") if Sendcloud.api_user.nil? }
@@ -12,7 +12,7 @@ module Sendcloud
     end
     
     
-    def base_url mod = 'stats', motion = 'get'
+    def base_url(mod = 'stats', motion = 'get')
       "#{Sendcloud.protocol}://#{Sendcloud.sendcloud_host}/webapi/#{mod}.#{motion}.json"
     end
     
