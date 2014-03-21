@@ -45,10 +45,11 @@ module Sendcloud
   
   def self.submit(method, url, parameters={})
     begin
-      api_config = { :api_user =>  Sendcloud.api_user, :api_key => Sendcloud.api_key}
-      merge_parameters = parameters.merge(api_config)
+      merge_parameters = parameters.merge({ :api_user =>  Sendcloud.api_user, :api_key => Sendcloud.api_key})
       new_parameters = method == :get ? {:params => merge_parameters} : merge_parameters
       return JSON.parse(RestClient.send(method, url, new_parameters))
+    rescue JSON::ParserError => e
+      return e.message
     rescue => e
       raise e
     end
