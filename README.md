@@ -1,8 +1,20 @@
 ## Usage
 
+
+#### Send Email using Rails ActionMailer
+```ruby
+An example would be adding the following to your appropriate config/environments/$RAILS_ENV.rb file:
+config.action_mailer.delivery_method = :sendcloud
+config.action_mailer.sendcloud_settings = {
+    :api_user => "YOUR_API_USER"
+	:api_key  => "YOUR_API_KEY",
+}
+```
+
 #### Configuration
 ```ruby
 # Initialize your Sendcloud object:
+
 Sendcloud.configure do |config|
   config.api_user  = 'your-api-user'
   config.api_key = 'your-api-key'
@@ -13,12 +25,6 @@ end
 # or alternatively:
 @sendcloud = Sendcloud(:api_user => 'your-api-user', :api_key => 'your-api-key')
 
-# or config
-config.action_mailer.delivery_method = :sendcloud
-config.action_mailer.sendcloud_settings = {
-    :api_user => "YOUR_API_USER"
-	:api_key  => "YOUR_API_KEY",
-}
 ```
 
 #### Mail
@@ -33,7 +39,6 @@ parameters = {
 }
 @sendcloud.mail.send_email(parameters)
 
-# or send email use ActionMailer 
 ```
 
 #### Stats
