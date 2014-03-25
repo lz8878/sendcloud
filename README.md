@@ -12,11 +12,19 @@ end
 
 # or alternatively:
 @sendcloud = Sendcloud(:api_user => 'your-api-user', :api_key => 'your-api-key')
+
+# or config
+config.action_mailer.delivery_method = :sendcloud
+config.action_mailer.sendcloud_settings = {
+    :api_user => "YOUR_API_USER"
+	:api_key  => "YOUR_API_KEY",
+}
 ```
 
 #### Mail
 ```ruby
 # send email
+
 parameters = {
   :to => "to1@sendcloud.com;to2@sendcloud.com",
   :subject => "ruby 调用WebAPI测试主题",
@@ -25,15 +33,7 @@ parameters = {
 }
 @sendcloud.mail.send_email(parameters)
 
-# send_template
-parameters = {
-  :template_invoke_name => 'sendcloud_template',
-  :subject => "邮件模板",
-  :from => "post@sendcloud.org",
-  :fromname => "Sender",
-  :substitution_vars => '{"to": ["to1@sendcloud.org", "to2@sendcloud.org"], "sub" : { "%name%" : ["yoyo", "jim"], "%money%" : ["1000", "200"]} }'
-}
-@sendcloud.mail.send_template(parameters)
+# or send email use ActionMailer 
 ```
 
 #### Stats

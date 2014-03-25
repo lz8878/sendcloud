@@ -49,7 +49,7 @@ module Sendcloud
       new_parameters = method == :get ? {:params => merge_parameters} : merge_parameters
       return JSON.parse(RestClient.send(method, url, new_parameters))
     rescue JSON::ParserError => e
-      return e.message
+      raise Sendcloud::Error.new("Unknown Sendcloud Error")
     rescue => e
       raise e
     end
