@@ -29,13 +29,14 @@ module Sendcloud
     def deliver!(mail)
       sendcloud = Sendcloud()
       begin
-        results = sendcloud.mail.send_email({
+        result = sendcloud.mail.send_email({
           :to => mail.destinations.join(';'),
           :html => mail.body.encoded,
           :subject => mail.subject,
-          :from => mail.from_addrs.first
+          :from => mail.from_addrs.first,
+          :fromname => mail[:fromname].to_s
         })
-        puts "Sendcloud send email result--------------->#{results}"
+        puts "Sendcloud send email result --------->\n#{result}"
       rescue =>e
         raise e
       end
