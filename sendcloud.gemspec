@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   
   spec.add_dependency(%q<rest-client>, [">= 0"])
-  spec.add_dependency(%q<multimap>, [">= 0"])
   
   spec.add_development_dependency(%q<rspec>, [">= 2"])
   spec.add_development_dependency "bundler", "~> 1.3"
