@@ -1,9 +1,8 @@
 require "action_mailer"
-require "sendcloud/version"
 require "rest-client"
 require "json"
-require "multimap"
 
+require "sendcloud/version"
 require "sendcloud/base"
 require "sendcloud/bounce"
 require "sendcloud/mail"
