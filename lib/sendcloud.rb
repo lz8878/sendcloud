@@ -20,13 +20,13 @@ module Sendcloud
   
   class DeliveryMethod
     
+    attr_accessor :settings
     def initialize(settings)
-      Sendcloud.api_user       = settings.fetch(:api_user) { raise ArgumentError.new(":api_user is a required argument to initialize Sendcloud") if Sendcloud.api_user.nil? }
-      Sendcloud.api_key        = settings.fetch(:api_key) { raise ArgumentError.new(":api_key is a required argument to initialize Sendcloud") if Sendcloud.api_key.nil? }
+      self.settings = settings
     end
     
     def deliver!(mail)
-      sendcloud = Sendcloud()
+      sendcloud = Sendcloud(self.settings)
       begin
         result = sendcloud.mail.send_email({
           :to => mail.destinations.join(';'),
