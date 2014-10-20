@@ -1,6 +1,7 @@
 require "action_mailer"
 require "rest-client"
 require "json"
+require "logger"
 
 require "sendcloud/version"
 require "sendcloud/base"
@@ -16,6 +17,7 @@ def Sendcloud(options = {})
 end
 
 
+
 module Sendcloud
   
   class DeliveryMethod
@@ -27,6 +29,9 @@ module Sendcloud
     
     def deliver!(mail)
       sendcloud = Sendcloud(self.settings)
+
+      deliver_log(mail)
+
       begin
         result = sendcloud.mail.send_email({
           :to => mail.destinations.join(';'),
@@ -35,12 +40,29 @@ module Sendcloud
           :from => mail.from_addrs.first,
           :fromname => mail[:fromname].to_s
         })
-        puts "Sendcloud send email result --------->\n#{result}"
+        deliver_result_log(result)
       rescue =>e
+        deliver_error(e)
         raise e
       end
-    end 
-      
+    end
+
+    def deliver_log(mail)
+      return unless Sendcloud.log
+      Sendcloud.log.info "Subject: --------->#{mail.subject}"
+      Sendcloud.log.info "To: --------->#{mail.destinations.join(';')}"
+      Sendcloud.log.info "From: --------->#{mail.from_addrs.first}"
+    end
+
+    def deliver_result_log(result)
+      return unless Sendcloud.log
+      Sendcloud.log.info "Sendcloud deliver result: --------->#{result}"
+    end
+
+    def deliver_error(e)
+      return unless Sendcloud.log
+      Sendcloud.log.fatal("Sendcloud error: ---------> #{e.to_s}")
+    end
   end
   
   ActionMailer::Base.add_delivery_method :sendcloud, Sendcloud::DeliveryMethod

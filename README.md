@@ -15,9 +15,12 @@ config.action_mailer.sendcloud_settings = {
 ```ruby
 # Initialize your Sendcloud object:
 
+
 Sendcloud.configure do |config|
   config.api_user  = 'your-api-user'
   config.api_key = 'your-api-key'
+  # log 'stdout' OR 'stderr' OR '/path/log/sendcloud.log'
+  config.log = 'stdout'
 end
 
 @sendcloud = Sendcloud()
