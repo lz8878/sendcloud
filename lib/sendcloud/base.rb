@@ -9,6 +9,7 @@ module Sendcloud
       Sendcloud.protocol       = options.fetch(:protocol, 'https')
       Sendcloud.api_user       = options.fetch(:api_user) { raise ArgumentError.new(":api_user is a required argument to initialize Sendcloud") if Sendcloud.api_user.nil? }
       Sendcloud.api_key        = options.fetch(:api_key) { raise ArgumentError.new(":api_key is a required argument to initialize Sendcloud") if Sendcloud.api_key.nil? }
+      Sendcloud.log = options[:log]
     end
     
     
@@ -54,4 +55,32 @@ module Sendcloud
       raise e
     end
   end
+
+  def self.log= log
+    @@log = create_log log
+  end
+
+  def self.create_log param
+    if param
+      if param.is_a? String
+        if param == 'stdout'
+          Logger.new STDOUT
+        elsif param == 'stderr'
+          Logger.new STDERR
+        else
+          # file logger
+          Logger.new param
+        end
+      else
+        param
+      end
+    end
+  end
+
+  @@log = nil
+
+  def self.log
+    @@log
+  end
+
 end
